@@ -37,8 +37,8 @@ class ModbusClient():
             # Reads 'count' amount of registers starting from the register number from the given slave unit
             result = self.client.read_holding_registers(address=register_number, count=count, unit=slave_number)
 
-            with open('data.txt', 'w') as f:
-                f.write(str(result.registers))
+            #with open('data.txt', 'w') as f:
+            #    f.write(str(result.registers))
 
             print(result.registers)
 
@@ -84,12 +84,14 @@ class ModbusClient():
             result = self.client.read_holding_registers(address=register_number, count=count, unit=slave_number)
             print(f'{result.registers}')
             # Start a scheduler for reading input every second
+            
             scheduler.enter(1, 1, self.get_input, (scheduler, register_number, count,
                                                                         slave_number,
                                                                         community_data,
                                                                         udp_transport_target_address,
                                                                         object_identity_address,
                                                                         mode))
+                                                                        
         scheduler.run()
 
-        #client.close()
+        #self.client.close()

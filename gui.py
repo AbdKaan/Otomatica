@@ -65,7 +65,7 @@ class ConnectionScreen(GridLayout):
 
         self.read_input = Button(text='Read Input', size_hint_y=None, height=50)
         self.add_widget(self.read_input)
-        self.read_input.bind(on_release=self.read)
+        #self.read_input.bind(on_release=self.read)
         self.register_number = TextInput(multiline=False, size_hint_y=None, height=50)
         self.add_widget(self.register_number)
         self.community_data = TextInput(multiline=False, size_hint_y=None, height=50)
@@ -147,8 +147,8 @@ class ConnectionScreen(GridLayout):
 
     def exit(self, widget):
         return MainApp().stop()
-    
-    def read(self, widget):
+    '''
+    def read(self, widget, scheduler):
         # Read first line of the data.txt file
         with open('data.txt') as f:
             try:
@@ -158,11 +158,11 @@ class ConnectionScreen(GridLayout):
                 pass
 
         # Read again every 2 seconds
-        #scheduler.enter(2, 1, self.read_input, (scheduler))
-    
+        scheduler.enter(2, 1, self.read, ())
+    '''
     def create_instance(self):
         modbus_client = ModbusClient(self.server_address.text,
-                                            int(self.server_port.text),
+                                            int(self.client_port.text),
                                             int(self.register_number.text),
                                             int(self.register_count.text),
                                             int(self.slave_number.text))
@@ -183,7 +183,7 @@ class ConnectionScreen(GridLayout):
         modbus_client.start()
         '''
         scheduler = sched.scheduler(time.time, time.sleep)
-        thread_reader = threading.Thread(target=self.read_input, daemon=True, args=[])
+        thread_reader = threading.Thread(target=self.read, daemon=True, args=[self.read_input, scheduler])
         thread_reader.start()
         '''
 

@@ -19,4 +19,10 @@ class ModbusServer():
         self.context = ModbusServerContext(slaves=self.store, single=True)
 
         # Start server
-        StartTcpServer(self.context, address=(self.server_ip, self.port))
+        try:
+            StartTcpServer(self.context, address=(self.server_ip, self.port))
+        except:
+            print("Server is shutdown.")
+
+if __name__ == '__main__':
+    server = ModbusServer("127.0.0.1", 502)

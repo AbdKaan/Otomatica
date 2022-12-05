@@ -197,7 +197,7 @@ class ConnectionScreen(GridLayout):
             self.modbus_client.client.write_register(register_number, now.hour)
             self.modbus_client.client.write_register(register_number+1, now.minute)
             self.modbus_client.client.write_register(register_number+2, now.second)
-            print("Input written.")
+        print("Input written.")
 
     def read(self, widget):
         if self.mode.text == "snmp":
@@ -209,7 +209,7 @@ class ConnectionScreen(GridLayout):
             print(result.registers)
 
     def create_instance(self):
-        self.modbus_client = ModbusClient(self.server_address.text,
+        self.modbus_client = ModbusClient(self.client_address.text,
                                             int(self.client_port.text),
                                             int(self.register_number.text),
                                             int(self.register_count.text),

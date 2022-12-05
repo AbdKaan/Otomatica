@@ -21,6 +21,8 @@ class ModbusClient():
         # Check if client is connected
         print(f'\nConnection = {str(client.connect())}\n')
 
+        print(client)
+
         return client
 
     def get_input(self, scheduler, register_number, count, slave_number, community_data,

@@ -29,6 +29,8 @@ class ModbusClient():
                                                                         udp_transport_target_address,
                                                                         object_identity_address,
                                                                         mode):
+        '''Reads data with regular time intervals'''
+
         if(mode == "test"):
             # Get current time and write to registers
             now = datetime.now()
@@ -97,3 +99,9 @@ class ModbusClient():
         scheduler.run()
 
         #self.client.close()
+
+if __name__ == '__main__':
+    pass
+    '''
+    client = ModbusClient()
+    '''

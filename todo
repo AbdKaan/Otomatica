@@ -1,3 +1,0 @@
-add port and ip to arguments
-Change the loop to iteratively instead of recursive(for stopping stack overflow)
-https://realpython.com/intro-to-python-threading/

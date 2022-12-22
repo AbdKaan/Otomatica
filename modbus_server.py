@@ -20,7 +20,7 @@ class ModbusServer():
 
         # Start server
         try:
-            StartTcpServer(selSf.context, address=(self.server_ip, self.port))
+            StartTcpServer(self.context, address=(self.server_ip, self.port))
         except:
             print("Server is shutdown.")
 
